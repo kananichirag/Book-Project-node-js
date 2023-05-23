@@ -296,7 +296,7 @@ module.exports = {
                     total_count:[{
                         $group:{
                             _id:null,
-                            count:{$sum:1}
+                            count:{$sum:1}                  
                         }
                     },
                 {
