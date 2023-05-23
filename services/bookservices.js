@@ -313,7 +313,6 @@ module.exports = {
                                 isbn:0,
                                 country:0,
                                 genre:0,
-                                format:0,
                                 publication_date:0,
                                 publisher:0
                             }
