@@ -189,9 +189,13 @@ module.exports = {
                                { $project:{
                                     _id:0,
                                     author_last_name:0,
-                                    title:0
-                                    
-
+                                    title:0,
+                                    country:0,
+                                    rating:0,
+                                    page_cont:0,
+                                    publication_date:0,
+                                    publisher:0,
+                                    isbn:0, 
                                 }},
                                 {$skip:(page - 1) * limit},
                                 {$limit:limit}   
@@ -325,10 +329,7 @@ module.exports = {
             
           ])
 
-          res({
-            status:200,
-            data:user
-          })
+          res({status:200,data:user})
             } catch (error) {
                 rej({status:500,message:"Something Went Wrong"});
             }

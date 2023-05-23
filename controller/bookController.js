@@ -201,5 +201,5 @@ module.exports = {
     Genre,
     Filter1,
     Filter2,
-    Filter3
+    Filter3,
 }
