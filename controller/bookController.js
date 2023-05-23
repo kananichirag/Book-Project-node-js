@@ -167,6 +167,31 @@ const Filter2 =  async (req,res) => {
 }
 
 
+
+const Filter3 = async (req,res) => {
+    try {
+        if(!req.query.page || !req.query.limit){
+            return response("Pagination is required");
+        }
+      
+         let resp = await BookServices.filter3(
+            req.query.page,
+            req.query.limit,
+            req.query.price,
+            req.query.title,
+         );
+
+         if(resp){
+            return response("Filter 3", resp.data,200,res)
+         } else{
+            return response("Something Wrong",{},500,res)
+         }
+        
+    } catch (err) {
+        return response(err.message, err?.error, err.status,res)
+    }
+}
+
 module.exports = {
     GetAll,
     Add,
@@ -175,5 +200,6 @@ module.exports = {
     deleteById,
     Genre,
     Filter1,
-    Filter2
+    Filter2,
+    Filter3
 }

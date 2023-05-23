@@ -1,6 +1,6 @@
 const Book = require('../models/user');
 const mongoose = require('mongoose');
-const { use } = require('../routes/bookroutes');
+
 
 module.exports = {
     Getall: (page,limit) => {
@@ -271,6 +271,67 @@ module.exports = {
                 })
             } catch (error) {
                rej({status:500, message:"Something Went Wrong"}) 
+            }
+        })
+    },
+
+
+
+    filter3 :(Page,Limit,Price,title) => {
+        return new Promise(async (res,rej) => {
+            try {
+           let page = parseInt(Page);     
+           let limit = parseInt(Limit);     
+           let price = parseInt(Price);     
+           
+          const user = await Book.aggregate([
+            {$match:{
+                title:title
+            }},
+            {$match:{
+                price:{$gt:price}
+            }},
+            {
+                $facet:{
+                    total_count:[{
+                        $group:{
+                            _id:null,
+                            count:{$sum:1}
+                        }
+                    },
+                {
+                    $project:{
+                        _id:0,
+                      
+                    }
+                }],
+                    result:[
+                        {
+                            $project:{
+                                _id:0,
+                                author_last_name:0,
+                                isbn:0,
+                                country:0,
+                                genre:0,
+                                format:0,
+                                publication_date:0,
+                                publisher:0
+                            }
+                        },
+                        {$skip:(page - 1) * limit},
+                        {$limit:limit}
+                    ]
+                }
+            }
+            
+          ])
+
+          res({
+            status:200,
+            data:user
+          })
+            } catch (error) {
+                rej({status:500,message:"Something Went Wrong"});
             }
         })
     }

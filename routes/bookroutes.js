@@ -13,6 +13,7 @@ BookRoute.delete('/delete/:id',BookController.deleteById);
 // Filter
 BookRoute.get('/filter',BookController.Filter1);
 BookRoute.get('/filter2',BookController.Filter2);
+BookRoute.get('/filter3',BookController.Filter3);
 BookRoute.get('/genre',BookController.Genre);
 
 
