@@ -363,6 +363,7 @@ module.exports = {
                     {
                         $project: {
                             _id: 1,
+                            author_first_name:1,
                             rating: 1,
                             Response: {
                                 $cond: { if: { $gte: ["$rating", 3] }, then: "true", else: "false" }
@@ -376,6 +377,27 @@ module.exports = {
                     },
                     { $skip: (page - 1) * limit },
                     { $limit: limit },
+                    {
+                        $facet:{
+                            total_count:[{
+                                $group:{
+                                    _id:null,
+                                    count:{$sum:1}
+                                }
+                            },
+                            {
+                                $project:{
+                                    _id:0
+                                }
+                            }
+                        ],
+                        result:[{
+                            $project:{
+                                _id:0
+                            }
+                        }]
+                        }
+                    }
 
                 ])
 
@@ -387,7 +409,7 @@ module.exports = {
                     }
                 }))
                 const result = await Book.bulkWrite(op);
-                res({ status: 200, data: qury })
+                res({ status: 200, data: qury    })
             } catch (error) {
                 rej({ status: 500, message: "Something Went Wrong" });
             }
