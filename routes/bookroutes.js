@@ -14,6 +14,7 @@ BookRoute.delete('/delete/:id',BookController.deleteById);
 BookRoute.get('/filter',BookController.Filter1);
 BookRoute.get('/filter2',BookController.Filter2);
 BookRoute.get('/filter3',BookController.Filter3);
+BookRoute.get('/filter4',BookController.Filter4);
 BookRoute.get('/genre',BookController.Genre);
 
 

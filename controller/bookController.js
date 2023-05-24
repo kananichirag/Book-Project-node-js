@@ -192,6 +192,26 @@ const Filter3 = async (req,res) => {
     }
 }
 
+
+const Filter4 = async (req,res) => {
+    try {
+       if(!req.query.page || !req.query.limit){
+        return response("Pganination is reqiured");
+       } 
+        let resp = await bookservices.filter4(
+            req.query.page,
+            req.query.limit,
+            );
+       if(resp) {
+            return response("Filter 4" ,resp.data,200,res)
+       }else{
+        return response("Something Wrong",{},500,res)
+       }
+    } catch (err) {
+      return response(err.message, err?.error, err.status, res)   
+    }
+}
+
 module.exports = {
     GetAll,
     Add,
@@ -202,4 +222,5 @@ module.exports = {
     Filter1,
     Filter2,
     Filter3,
+    Filter4,
 }
