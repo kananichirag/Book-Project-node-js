@@ -41,6 +41,7 @@ const Add = async (req,res) => {
     }
 }
 
+
 const FindByIsdn = async (req,res) => {
     try {
         // console.log(req.query.id);
@@ -59,7 +60,6 @@ const FindByIsdn = async (req,res) => {
 }
 
 
-
 const FindAndUpdate = async (req,res) => {
     try {
         let resp = await BookServices.Update(req.params.id,req.body);
@@ -75,7 +75,6 @@ const FindAndUpdate = async (req,res) => {
     }
     
 }
-
 
 
 const deleteById = async (req,res) => {
@@ -165,7 +164,6 @@ const Filter2 =  async (req,res) => {
         return response(err.message, err?.error, err.status, res)
     }
 }
-
 
 
 const Filter3 = async (req,res) => {

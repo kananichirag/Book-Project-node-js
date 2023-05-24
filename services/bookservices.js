@@ -31,6 +31,7 @@ module.exports = {
         })
     },
 
+
     add: (data) => {
         return new Promise(async (res, rej) => {
             try {
@@ -87,6 +88,7 @@ module.exports = {
             }
         })
     },
+
 
     Delete: (id) => {
         return new Promise(async (res, rej) => {
@@ -167,7 +169,6 @@ module.exports = {
     },
 
 
-
     filter: (Page, Limit, genre, format) => {
         return new Promise(async (res, rej) => {
             try {
@@ -231,8 +232,6 @@ module.exports = {
     },
 
 
-
-
     filter2: (Page, Limit, StartDate, EndDate, publisher) => {
         return new Promise(async (res, rej) => {
             try {
@@ -291,7 +290,6 @@ module.exports = {
             }
         })
     },
-
 
 
     filter3: (Page, Limit, Price, title) => {
@@ -353,6 +351,7 @@ module.exports = {
         })
     },
 
+
     filter4: (Page, Limit) => {
         return new Promise(async (res, rej) => {
             try {
@@ -409,7 +408,7 @@ module.exports = {
                     }
                 }))
                 const result = await Book.bulkWrite(op);
-                res({ status: 200, data: qury    })
+                res({ status: 200, data: qury})
             } catch (error) {
                 rej({ status: 500, message: "Something Went Wrong" });
             }
