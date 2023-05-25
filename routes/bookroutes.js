@@ -21,6 +21,9 @@ BookRoute.get('/genre',BookController.Genre);
 //$bucket
 BookRoute.get('/bucket',BookController.Bucket);
 
+//$lookup
+BookRoute.get('/lookup',BookController.Lookup);
+
 
 
 

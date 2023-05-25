@@ -1,5 +1,6 @@
 
 const Book = require('../models/user');
+const cust = require('../models/orderuser');
 const mongoose = require('mongoose');
 
 
@@ -421,9 +422,9 @@ module.exports = {
                
              let user = await Book.aggregate([
                    {
-                    $bucket:{
+                    $bucket:{ 
                         groupBy:"$page_count",
-                        boundaries:[50,70,90],
+                        boundaries:[50,70,90],   // we can set here bounsariels as we want
                         default: "other",
                         output:{
                             "count":{$sum:1},
@@ -431,11 +432,15 @@ module.exports = {
                                 $push:{
                                     "name":{$concat:["$author_first_name"," ","$author_last_name"]},
                                     "page_count":"$page_count"
-                                }
+                                },
+                                
                             }
-                        }
+                            
+                            
+                        }   
                     }
-                   }
+                   },
+                   
              ])
                   
              res({status:200, data:user}) 
@@ -443,8 +448,46 @@ module.exports = {
                 rej({status:500, message:"Something Went Wrong"})
             }
         })
-    }
+    },
 
+    Lookup :()  => {
+        return new  Promise(async (res,rej)  => {
+            try {
+                
+            let user = await cust.aggregate([
+                 {
+                    $lookup:
+                    {
+                        from:"books",
+                        localField:"price",
+                        foreignField:"price",
+                        as:"result",
+                    }
+                 },
+                 {
+                    $facet:{
+                        total_count:[{
+                            $group:{
+                                _id:null,
+                                count:{$sum :1}
+                            }
+                        },{
+                            $project:{
+                                _id:0
+                            }
+                        }
+                    ],
+                    result:[]
+                    }
+                 }     
+            ])   
+                 res({status:200, data:user})
+              
+            } catch (error) {
+                rej({status:500, message:"Something Went Wrong"})
+            }
+        })
 
+}
 
 }

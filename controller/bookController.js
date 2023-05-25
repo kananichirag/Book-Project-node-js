@@ -219,10 +219,26 @@ const Bucket = async(req,res) => {
         if(resp){
             return response("Bucket !!",resp.data,200,res);
         } else{
-            return response("Something Wrong");
+            return response("Something Wrong" , {},500, res);
         }
     } catch (err) {
         return response(err.message, err?.error, err.status , res);
+    }
+}
+
+const Lookup = async(req,res) => {
+    try {
+        
+       let resp  = await BookServices.Lookup();
+       
+       if(resp){
+        return response("Lookup !!!",resp.data,200,res);
+       } else{
+        return response("Something Wrong",{},500,res)
+       }
+
+    } catch (err) {
+        return response(err.message, err?.error, err.status ,res)
     }
 }
 module.exports = {
@@ -236,5 +252,6 @@ module.exports = {
     Filter2,
     Filter3,
     Filter4,
-    Bucket
+    Bucket,
+    Lookup
 }
