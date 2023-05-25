@@ -18,6 +18,9 @@ BookRoute.get('/filter4',BookController.Filter4);
 BookRoute.get('/genre',BookController.Genre);
 
 
+//$bucket
+BookRoute.get('/bucket',BookController.Bucket);
+
 
 
 

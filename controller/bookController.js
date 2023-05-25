@@ -210,6 +210,21 @@ const Filter4 = async (req,res) => {
     }
 }
 
+
+const Bucket = async(req,res) => {
+    try {
+        
+        let resp = await BookServices.Bucket();
+
+        if(resp){
+            return response("Bucket !!",resp.data,200,res);
+        } else{
+            return response("Something Wrong");
+        }
+    } catch (err) {
+        return response(err.message, err?.error, err.status , res);
+    }
+}
 module.exports = {
     GetAll,
     Add,
@@ -221,4 +236,5 @@ module.exports = {
     Filter2,
     Filter3,
     Filter4,
+    Bucket
 }

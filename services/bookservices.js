@@ -413,8 +413,37 @@ module.exports = {
                 rej({ status: 500, message: "Something Went Wrong" });
             }
         })
-    }
+    },
 
+    Bucket:()  => {
+        return new Promise(async (res,rej)  => {
+            try {
+               
+             let user = await Book.aggregate([
+                   {
+                    $bucket:{
+                        groupBy:"$page_count",
+                        boundaries:[50,70,90],
+                        default: "other",
+                        output:{
+                            "count":{$sum:1},
+                            "author":{
+                                $push:{
+                                    "name":{$concat:["$author_first_name"," ","$author_last_name"]},
+                                    "page_count":"$page_count"
+                                }
+                            }
+                        }
+                    }
+                   }
+             ])
+                  
+             res({status:200, data:user}) 
+            } catch (error) {
+                rej({status:500, message:"Something Went Wrong"})
+            }
+        })
+    }
 
 
 
