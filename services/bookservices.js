@@ -454,11 +454,11 @@ module.exports = {
         return new  Promise(async (res,rej)  => {
             try {
                 
-            let user = await cust.aggregate([
+            let user = await Book.aggregate([
                  {
                     $lookup:
                     {
-                        from:"books",
+                        from:"customers",   // use the Collections name which was given in the Mongo DB Compass
                         localField:"price",
                         foreignField:"price",
                         as:"result",
