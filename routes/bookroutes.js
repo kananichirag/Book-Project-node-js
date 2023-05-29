@@ -24,7 +24,8 @@ BookRoute.get('/bucket',BookController.Bucket);
 //$lookup
 BookRoute.get('/lookup',BookController.Lookup);
 
-
-
+// $Sort
+BookRoute.get('/sort',BookController.sort);
 
 module.exports = BookRoute;
+

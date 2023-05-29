@@ -416,6 +416,8 @@ module.exports = {
         })
     },
 
+
+
     Bucket:()  => {
         return new Promise(async (res,rej)  => {
             try {
@@ -450,7 +452,8 @@ module.exports = {
         })
     },
 
-    Lookup :()  => {
+
+    Lookup :()  => {                                                                                                                    
         return new  Promise(async (res,rej)  => {
             try {
                 
@@ -488,6 +491,29 @@ module.exports = {
             }
         })
 
-}
+},
+
+
+    Sort :()  => {
+        return new Promise(async (res,rej)  => {
+            try {
+                
+               let user = await Book.aggregate([
+                   {
+                    $match:{
+                        title:"Ms",
+                        language:"Albanian"
+                    }
+                   },
+                    {$sort:{rating:1}},
+                    {$limit:10}
+               ])
+           
+           res({status:200,data:user})
+            } catch (error) {
+                rej({status:500, message:"Something Went Wrong"})
+            }
+        })
+    }
 
 }

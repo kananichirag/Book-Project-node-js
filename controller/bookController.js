@@ -226,7 +226,6 @@ const Bucket = async(req,res) => {
     }
 }
 
-
 const Lookup = async(req,res) => {
     try {
         
@@ -242,6 +241,23 @@ const Lookup = async(req,res) => {
         return response(err.message, err?.error, err.status ,res)
     }
 }
+
+const  sort = async(req,res) => {
+
+    try {
+        
+       let resp = await BookServices.Sort()
+       
+       if(resp){
+        return response("Sort !!!",resp.data, 200,res)
+       } else{
+        return response("Something Wrong")
+       }
+    } catch (err) {
+        return response(err.message, err?.error, err.status, res )
+    }
+
+}
 module.exports = {
     GetAll,
     Add,
@@ -254,5 +270,6 @@ module.exports = {
     Filter3,
     Filter4,
     Bucket,
-    Lookup
+    Lookup,
+    sort
 }
